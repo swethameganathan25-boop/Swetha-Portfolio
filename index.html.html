@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Swetha M — Computer Science Graduate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #14162A;
+    --bg-alt: #1D2044;
+    --paper: #F5F2FA;
+    --gold: #E8B84B;
+    --rose: #E2685C;
+    --muted: #9491B8;
+    --line: rgba(245,242,250,0.16);
+  }
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--paper);
+    font-family: 'Manrope', sans-serif;
+    font-weight: 300;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+  ::selection{ background: var(--gold); color: #14162A; }
+  a{ color: inherit; }
+  .mono{ font-family: 'Space Mono', monospace; }
+  .tag-label{
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--rose);
+  }
+  h1, h2, h3{ margin:0; font-family:'Instrument Serif', serif; font-weight: 400; }
+
+  /* stitched divider — nods to her hobby of stitching */
+  .stitch{
+    height: 1px;
+    background-image: repeating-linear-gradient(90deg, var(--muted) 0 8px, transparent 8px 16px);
+    opacity: 0.6;
+    margin: 0;
+  }
+  section{ padding: 6.5rem 8vw; position: relative; }
+  section + section{ border-top: none; }
+  @media (max-width: 720px){ section{ padding: 4rem 6vw; } }
+
+  nav{
+    position: fixed; top:0; left:0; right:0; z-index: 50;
+    display:flex; justify-content: space-between; align-items:center;
+    padding: 1.3rem 8vw;
+    background: rgba(20,22,42,0.82);
+    backdrop-filter: blur(10px);
+  }
+  nav .brand{ font-family:'Instrument Serif', serif; font-size:1.5rem; letter-spacing: 0.01em; }
+  nav .brand em{ color: var(--gold); font-style: italic; }
+  nav ul{ list-style:none; display:none; gap: 2rem; margin:0; padding:0; }
+  nav ul li a{ text-decoration:none; font-size:0.75rem; font-family:'Space Mono',monospace; letter-spacing:0.08em; text-transform:uppercase; color: var(--muted); transition:.2s; }
+  nav ul li a:hover{ color: var(--gold); }
+  @media (min-width:800px){ nav ul{ display:flex; } }
+
+  /* HERO */
+  #hero{
+    min-height: 100vh;
+    display:flex; flex-direction:column; justify-content:center;
+    padding-top: 8rem;
+  }
+  .hero-row{ display:flex; justify-content:space-between; align-items:flex-start; gap:3rem; flex-wrap: wrap; }
+  .hero-title{
+    font-size: clamp(3rem, 8vw, 6.4rem);
+    line-height: 0.96;
+    max-width: 820px;
+  }
+  .hero-title i{ color: var(--gold); }
+  .hero-sub{ max-width: 520px; margin-top: 1.8rem; color: var(--muted); font-size: 1.08rem; font-weight:400; }
+  .hero-meta{ margin-top: 2.6rem; display:flex; gap:1.6rem; flex-wrap:wrap; align-items:center; }
+
+  /* vinyl badge signature — nods to "listening to music" */
+  .vinyl-wrap{ position: relative; width: 168px; height:168px; flex-shrink:0; }
+  .vinyl{
+    width:168px; height:168px; border-radius:50%;
+    background:
+      repeating-radial-gradient(circle, transparent 0 6px, rgba(245,242,250,0.05) 6px 7px),
+      radial-gradient(circle at 35% 30%, #2B2E52, #14162A 70%);
+    border: 1px solid var(--line);
+    position:relative;
+    animation: spin 12s linear infinite;
+    display:flex; align-items:center; justify-content:center;
+  }
+  @media (prefers-reduced-motion: reduce){ .vinyl{ animation:none; } }
+  @keyframes spin{ from{ transform: rotate(0deg);} to{ transform: rotate(360deg);} }
+  .vinyl-label{
+    width: 62px; height:62px; border-radius:50%;
+    background: var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Space Mono',monospace; font-size:0.5rem; color:#14162A;
+    text-align:center; line-height:1.1; padding:4px;
+  }
+  .vinyl::after{
+    content:""; position:absolute; width:6px; height:6px; border-radius:50%;
+    background: var(--bg); top:50%; left:50%; transform:translate(-50%,-50%);
+  }
+  .vinyl-cap{
+    position:absolute; bottom:-1.6rem; left:50%; transform:translateX(-50%);
+    font-family:'Space Mono',monospace; font-size:0.65rem; color: var(--muted);
+    white-space:nowrap; letter-spacing:0.06em;
+  }
+
+  .hero-links{ display:flex; gap:1.4rem; flex-wrap:wrap; font-family:'Space Mono',monospace; font-size:0.82rem; }
+  .hero-links button, .hero-links a{
+    background:none; border:none; color: var(--paper); cursor:pointer;
+    font-family:'Space Mono',monospace; font-size:0.82rem; padding:0;
+    text-decoration:none; border-bottom: 1px solid var(--line);
+    padding-bottom: 3px; transition:.2s;
+  }
+  .hero-links button:hover, .hero-links a:hover{ color: var(--gold); border-color: var(--gold); }
+  .toast{
+    position:fixed; bottom: 2rem; left:50%; transform: translateX(-50%) translateY(20px);
+    background: var(--gold); color:#14162A; padding: 0.7rem 1.3rem; border-radius: 6px;
+    font-family:'Space Mono',monospace; font-size:0.78rem;
+    opacity:0; pointer-events:none; transition: all .3s ease; z-index:100;
+  }
+  .toast.show{ opacity:1; transform: translateX(-50%) translateY(0); }
+
+  .sec-head{ margin-bottom: 2.8rem; }
+  .sec-head .tag-label{ display:block; margin-bottom: 0.6rem; }
+  .sec-head h2{ font-size: clamp(2rem, 3.6vw, 3rem); font-style: italic; }
+
+  /* ABOUT */
+  #about .about-grid{ display:grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items:start; }
+  @media (max-width:800px){ #about .about-grid{ grid-template-columns:1fr; } }
+  #about p{ font-size: 1.08rem; max-width: 600px; font-weight:400; }
+  .fact-card{ background: var(--bg-alt); border: 1px solid var(--line); border-radius: 10px; padding: 1.8rem 2rem; }
+  .fact-card .row{ display:flex; justify-content:space-between; padding: 0.6rem 0; border-bottom: 1px dashed var(--line); font-size:0.92rem; }
+  .fact-card .row:last-child{ border-bottom:none; }
+  .fact-card .row span:first-child{ color: var(--muted); font-family:'Space Mono',monospace; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.06em; }
+  .fact-card .row span:last-child{ color: var(--paper); text-align:right; }
+
+  /* SKILLS */
+  .skill-groups{ display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:2.4rem; }
+  .skill-group h3{ font-family:'Space Mono',monospace; font-style:normal; font-size:0.78rem; color: var(--gold); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:1rem; font-weight:700;}
+  .skill-group .tags{ display:flex; flex-wrap:wrap; gap:0.5rem; }
+  .tag{
+    font-family:'Manrope',sans-serif; font-size:0.86rem; font-weight:500;
+    padding:0.45rem 0.9rem; border:1px solid var(--line); border-radius: 999px;
+    color: var(--paper); transition:.2s;
+  }
+  .tag:hover{ border-color: var(--rose); color: var(--rose); }
+
+  /* WORK / PROJECTS asymmetric cards */
+  .work-grid{ display:grid; grid-template-columns: 1fr; gap: 2rem; }
+  .card{
+    border:1px solid var(--line); background: var(--bg-alt); border-radius: 12px;
+    padding: 2.4rem 2.6rem; position:relative; overflow:hidden;
+  }
+  .card::before{
+    content:""; position:absolute; top:0; left:0; width:5px; height:100%;
+    background: linear-gradient(var(--gold), var(--rose));
+  }
+  .card-head{ display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:0.6rem; margin-bottom:0.5rem; }
+  .card-head h3{ font-size: 1.6rem; font-style: italic; font-weight:400; }
+  .card-head .date{ font-family:'Space Mono',monospace; font-size:0.75rem; color: var(--rose); }
+  .card .stack{ font-family:'Space Mono',monospace; font-size:0.76rem; color: var(--gold); margin-bottom: 1.1rem; }
+  .card ul{ margin:0; padding-left: 1.2rem; color: var(--muted); font-size:0.96rem; }
+  .card ul li{ margin-bottom: 0.45rem; }
+  .card ul li::marker{ color: var(--rose); }
+
+  /* EDUCATION */
+  .edu-row{ display:flex; justify-content:space-between; align-items:baseline; padding:1.5rem 0; flex-wrap:wrap; gap:0.5rem; }
+  .edu-row + .edu-row{ border-top: none; }
+  .edu-row h3{ font-size:1.3rem; font-style:italic; font-weight:400; }
+  .edu-row .school{ color: var(--muted); font-size:0.92rem; font-family:'Manrope',sans-serif; }
+  .edu-row .score{ font-family:'Space Mono',monospace; color: var(--gold); font-size:0.95rem; text-align:right; }
+  .edu-row .yr{ font-family:'Space Mono',monospace; color: var(--muted); font-size:0.72rem; display:block; margin-bottom:2px;}
+
+  /* STRIP */
+  .strip-grid{ display:grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap:2.6rem; }
+  .strip-grid h3{ font-family:'Space Mono',monospace; font-style:normal; font-size:0.75rem; color: var(--muted); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:1rem; }
+  .strip-grid ul{ list-style:none; margin:0; padding:0; }
+  .strip-grid ul li{ padding:0.5rem 0; font-size:0.98rem; color: var(--paper); border-bottom: 1px dashed var(--line); }
+  .strip-grid ul li:last-child{ border-bottom:none; }
+
+  /* CONTACT */
+  #contact{ text-align:center; padding-bottom:5rem; }
+  #contact .tag-label{ display:block; margin-bottom:1rem; }
+  #contact h2{ font-size: clamp(2.2rem,5.5vw,3.8rem); font-style:italic; margin-bottom:1.2rem; }
+  #contact p{ color: var(--muted); max-width:480px; margin:0 auto 2.4rem; }
+  .contact-links{ display:flex; justify-content:center; gap:1.2rem; flex-wrap:wrap; }
+  .btn{
+    font-family:'Space Mono',monospace; font-size:0.82rem; padding:0.9rem 1.7rem;
+    border-radius: 999px; text-decoration:none; border:1px solid var(--gold); color: var(--gold);
+    cursor:pointer; background:none; transition:.2s;
+  }
+  .btn:hover{ background: var(--gold); color:#14162A; }
+  .btn.solid{ background: var(--rose); border-color: var(--rose); color: var(--bg); }
+  .btn.solid:hover{ opacity:.85; }
+
+  footer{ text-align:center; padding:2rem; font-family:'Space Mono',monospace; font-size:0.72rem; color: var(--muted); }
+
+  @media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important; } }
+  a:focus-visible, button:focus-visible{ outline: 2px solid var(--gold); outline-offset:3px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">Swetha <em>M</em></div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-row">
+    <div>
+      <span class="tag-label">Chennai, India</span>
+      <h1 class="hero-title">Building things<br>that <i>listen</i>,<br>and respond.</h1>
+      <p class="hero-sub">Computer Science graduate with hands-on experience in Python, Java, SQL and web development. Open to any full-time opportunity where I can learn, contribute, and grow.</p>
+      <div class="hero-links">
+        <button id="email-btn" type="button">swethameganathan25@gmail.com ↗</button>
+        <a href="tel:9342077913">+91 93420 77913</a>
+      </div>
+    </div>
+    <div class="vinyl-wrap">
+      <div class="vinyl"><div class="vinyl-label">SWETHA<br>M</div></div>
+      <div class="vinyl-cap">est. Chennai, 2026</div>
+    </div>
+  </div>
+</section>
+
+<div class="stitch"></div>
+
+<section id="about">
+  <div class="sec-head">
+    <span class="tag-label">01 — About</span>
+    <h2>A little about me</h2>
+  </div>
+  <div class="about-grid">
+    <p>I'm a motivated, detail-oriented Computer Science graduate with hands-on experience across Python, Java, SQL and web development. I like problem-solving and database work, and I've spent the last year turning that into real applications — an e-commerce site during my internship, and a voice-controlled folder manager as a personal project. I'm eager to bring that same curiosity into an IT role, and to keep learning as I go.</p>
+    <div class="fact-card">
+      <div class="row"><span>Based</span><span>Chennai, India</span></div>
+      <div class="row"><span>Degree</span><span>B.Sc Computer Science</span></div>
+      <div class="row"><span>Timeline</span><span>2023 – 2026</span></div>
+      <div class="row"><span>Languages</span><span>Tamil, English</span></div>
+      <div class="row"><span>Status</span><span>Open to work</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="stitch"></div>
+
+<section id="skills">
+  <div class="sec-head">
+    <span class="tag-label">02 — Skills</span>
+    <h2>What I work with</h2>
+  </div>
+  <div class="skill-groups">
+    <div class="skill-group">
+      <h3>Languages</h3>
+      <div class="tags"><span class="tag">Python</span><span class="tag">Java</span><span class="tag">SQL</span></div>
+    </div>
+    <div class="skill-group">
+      <h3>Web technologies</h3>
+      <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+    </div>
+    <div class="skill-group">
+      <h3>Frameworks &amp; tools</h3>
+      <div class="tags"><span class="tag">Flask</span><span class="tag">VS Code</span><span class="tag">MS Word</span><span class="tag">PowerPoint</span></div>
+    </div>
+    <div class="skill-group">
+      <h3>Concepts</h3>
+      <div class="tags"><span class="tag">OOP</span><span class="tag">DBMS</span><span class="tag">Basic API design</span><span class="tag">ChatGPT-assisted dev</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="stitch"></div>
+
+<section id="work">
+  <div class="sec-head">
+    <span class="tag-label">03 — Internship</span>
+    <h2>Where I've worked</h2>
+  </div>
+  <div class="work-grid">
+    <div class="card">
+      <div class="card-head">
+        <h3>Ecommerce Website — InternPe</h3>
+        <span class="date">April 2025 – May 2025</span>
+      </div>
+      <div class="stack">Python · Flask · HTML · CSS · JavaScript · SQL</div>
+      <ul>
+        <li>Developed an e-commerce web application with product listing and user login system</li>
+        <li>Implemented shopping cart functionality and user interaction features</li>
+        <li>Integrated a SQL database for storing user and product data</li>
+        <li>Built a responsive UI using HTML, CSS, and JavaScript</li>
+        <li>Followed a modular coding approach for efficient development</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-head" style="margin-top:3.6rem;">
+    <span class="tag-label">04 — Projects</span>
+    <h2>What I've built</h2>
+  </div>
+  <div class="work-grid">
+    <div class="card">
+      <div class="card-head">
+        <h3>Voice Controlled Folder Management System</h3>
+      </div>
+      <div class="stack">Python · Flask · HTML · CSS · JavaScript · SQL</div>
+      <ul>
+        <li>Developed a web-based application to manage folders using voice commands</li>
+        <li>Implemented speech recognition logic for processing voice commands</li>
+        <li>Integrated a voice feedback system to provide real-time audio responses</li>
+        <li>Implemented user authentication for secure access</li>
+        <li>Reduced manual effort by automating file operations and improving user interaction</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="stitch"></div>
+
+<section id="education">
+  <div class="sec-head">
+    <span class="tag-label">05 — Education</span>
+    <h2>How I got here</h2>
+  </div>
+  <div class="edu-row">
+    <div><h3>B.Sc Computer Science</h3><div class="school">Ethiraj College for Women, Chennai</div></div>
+    <div class="score"><span class="yr">June 2023 – April 2026</span>79.97%</div>
+  </div>
+  <div class="edu-row">
+    <div><h3>12th Standard</h3><div class="school">The Rani Meyyammai Girls Higher Secondary School, Chennai</div></div>
+    <div class="score"><span class="yr">2023</span>78.16%</div>
+  </div>
+</section>
+
+<div class="stitch"></div>
+
+<section id="more">
+  <div class="sec-head">
+    <span class="tag-label">06 — More</span>
+    <h2>Beyond the code</h2>
+  </div>
+  <div class="strip-grid">
+    <div><h3>Certifications</h3><ul><li>Python for Data Science — NPTEL</li><li>Type Writing — Junior Level</li></ul></div>
+    <div><h3>Soft skills</h3><ul><li>Problem Solving</li><li>Leadership</li><li>Decision Making</li><li>Quick Learning Ability</li></ul></div>
+    <div><h3>Languages</h3><ul><li>Tamil</li><li>English</li></ul></div>
+    <div><h3>Hobbies</h3><ul><li>Listening to Music</li><li>Stitching Clothes</li><li>Dancing</li></ul></div>
+  </div>
+</section>
+
+<div class="stitch"></div>
+
+<section id="contact">
+  <span class="tag-label">Get in touch</span>
+  <h2>Let's build something together</h2>
+  <p>I'm actively looking for opportunities in Chennai — open to any role, remote or on-site, where I can contribute and keep learning.</p>
+  <div class="contact-links">
+    <button class="btn solid" id="email-btn-2" type="button">Email me</button>
+    <a class="btn" href="https://linkedin.com/in/swetha-meganathan-82b8a0314" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="btn" href="https://github.com/swethameganathan25-boop" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</section>
+
+<footer>Built by Swetha M · Chennai, India</footer>
+<div class="toast" id="toast">Email copied — swethameganathan25@gmail.com</div>
+
+<script>
+  const EMAIL = "swethameganathan25@gmail.com";
+  const toast = document.getElementById('toast');
+  function showToast(){
+    toast.classList.add('show');
+    setTimeout(()=> toast.classList.remove('show'), 2600);
+  }
+  function handleEmailClick(e){
+    // Try to open the mail client; also copy the address as a reliable fallback
+    // (mailto: links are blocked inside many in-app preview frames)
+    if(navigator.clipboard){
+      navigator.clipboard.writeText(EMAIL).catch(()=>{});
+    }
+    showToast();
+    window.location.href = "mailto:" + EMAIL;
+  }
+  document.getElementById('email-btn').addEventListener('click', handleEmailClick);
+  document.getElementById('email-btn-2').addEventListener('click', handleEmailClick);
+</script>
+
+</body>
+</html>
